@@ -1,4 +1,5 @@
-import { React } from 'react';
+//import { React } from 'react';
+import { Fragment } from 'react';
 import { TodoCounter } from './TodoCounter.js';
 import { TodoSearch } from "./TodoSearch.js";
 import { TodoItem } from "./TodoItem.js";
@@ -16,16 +17,19 @@ const todos = [
 function App(props) {
   return (
 
-    <React.Fragment>
+    <Fragment>
       <TodoCounter/>
     <TodoSearch/>
     <TodoList>
       {todos.map(todo => (
-        <TodoItem key={todo.text} text={todo.text}/>
+        <TodoItem 
+        key={todo.text} 
+        text={todo.text}
+        completed={todo.completed}/>
       ))}
     </TodoList>
     <CreateTodoButton/>
-    </React.Fragment>
+    </Fragment>
     
   );
 }
