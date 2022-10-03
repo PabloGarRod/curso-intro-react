@@ -11,6 +11,8 @@ const defaultTodos = [
   {text: 'Cortar cebollas', completed: true},
   {text: 'Tomar curso react', completed: false},
   {text: 'Llorar en la llorería', completed: false},
+  {text: 'Cenar', completed: false},
+  {text: 'Salir de Bronce', completed: false},
 ]
 
 function App() {
@@ -29,8 +31,22 @@ function App() {
       const todoText = todo.text.toLowerCase()
       const searchText = searchValue.toLocaleLowerCase()
       return todoText.includes(searchText);
-    })
+        })
   }
+
+  const completeTodo = (text) => {
+      const todoIndex = todos.findIndex(todo => todo.text === text);
+      const newTodos = [...todos]
+      newTodos[todoIndex].completed = true;
+      setTodos(newTodos);
+   }
+
+   const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos]
+    newTodos.splice(todoIndex, 1)
+    setTodos(newTodos);
+ }
 
   return (
 
@@ -48,7 +64,9 @@ function App() {
         <TodoItem 
         key={todo.text} 
         text={todo.text}
-        completed={todo.completed}/>
+        completed={todo.completed}
+        onComplete = {()=>completeTodo(todo.text)}
+        onDelete = {()=>deleteTodo(todo.text)}/>
       ))}
     </TodoList>
     <CreateTodoButton/>
@@ -56,5 +74,7 @@ function App() {
     
   );
 }
+
+
 
 export default App;
